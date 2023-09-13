@@ -172,7 +172,7 @@
         <!--Navigation Controller-->
         <scene sceneID="UPx-H7-eaU">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4QG-ge-lvY" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4QG-ge-lvY" customClass="NavigationController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jyn-aO-fAU">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>

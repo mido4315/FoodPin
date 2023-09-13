@@ -17,21 +17,38 @@ class RestaurantDetailViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Configure the navigation bar appearance
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.hidesBarsOnSwipe = false
+        
+        tableView.contentInsetAdjustmentBehavior = .never
+        
+        // Configure header view
+        headerView.nameLabel.text = restaurant.name
+        headerView.typeLabel.text = restaurant.type
+        headerView.headerImageView.image = UIImage(named: restaurant.image)
+        
+        let heartImage = restaurant.isFavorite ? "heart.fill" : "heart"
+        headerView.heartButton.tintColor = restaurant.isFavorite ? .systemYellow : .white
+        headerView.heartButton.setImage(UIImage(systemName: heartImage), for: .normal)
+
+        // Configure the data source
         tableView.delegate = self
         tableView.dataSource = self
-        navigationItem.largeTitleDisplayMode = .never
         tableView.separatorStyle = .none
-        //navigationController?.navigationBar.prefersLargeTitles = false
-            // Configure header view
-            headerView.nameLabel.text = restaurant.name
-            headerView.typeLabel.text = restaurant.type
-            headerView.headerImageView.image = UIImage(named: restaurant.image)
-            let heartImage = restaurant.isFavorite ? "heart.fill" : "heart"
-            headerView.heartButton.tintColor = restaurant.isFavorite ? .systemYellow : .white
-            headerView.heartButton.setImage(UIImage(systemName: heartImage), for: .normal)
         
+
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.hidesBarsOnSwipe = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
 }
 
 extension RestaurantDetailViewController: UITableViewDataSource, UITableViewDelegate {

@@ -43,9 +43,31 @@ class RestaurantTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Enable large title for navigation bar
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.hidesBarsOnSwipe = true
+        navigationItem.backButtonTitle = ""
+        
+        // Customize the navigation bar appearance
+        if let appearance = navigationController?.navigationBar.standardAppearance {
+        
+            appearance.configureWithTransparentBackground()
+            
+            if let customFont = UIFont(name: "Nunito-Bold", size: 45.0) {
+                appearance.titleTextAttributes = [.foregroundColor: UIColor(named: "NavigationBarTitle")!]
+                appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "NavigationBarTitle")!, .font: customFont]
+            }
+            
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.compactAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        }
+
+        // Set up the data source of the table view
         tableView.dataSource = dataSource
         tableView.separatorStyle = .none
         
+        // Create a snapshot and populate the data
         var snapshot = NSDiffableDataSourceSnapshot<Section, Restaurant>()
         snapshot.appendSections([.all])
         snapshot.appendItems(restaurants, toSection: .all)
@@ -53,13 +75,13 @@ class RestaurantTableViewController: UITableViewController {
         dataSource.apply(snapshot, animatingDifferences: false)
         
         tableView.cellLayoutMarginsFollowReadableWidth = true
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-        tableView.cellLayoutMarginsFollowReadableWidth = true
-
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.hidesBarsOnSwipe = true
+    }
     // MARK: - UITableView Diffable Data Source
     
     func configureDataSource() -> RestaurantDiffableDataSource {
