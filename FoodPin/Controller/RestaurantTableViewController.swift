@@ -53,7 +53,11 @@ class RestaurantTableViewController: UITableViewController {
         dataSource.apply(snapshot, animatingDifferences: false)
         
         tableView.cellLayoutMarginsFollowReadableWidth = true
+        
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+
     }
     
     // MARK: - UITableView Diffable Data Source
@@ -200,7 +204,12 @@ class RestaurantTableViewController: UITableViewController {
     }
 // MARK: - Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == "showRestaurantDetail" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let destinationController = segue.destination as! RestaurantDetailViewController
+                destinationController.restaurant = restaurants[indexPath.row]
+            }
+        }
     }
     
 }
