@@ -198,7 +198,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kat-vs-MDe">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="HSS-jp-OgW" userLabel="Header View">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="HSS-jp-OgW" userLabel="Header View" customClass="RestaurantDetailHeaderView" customModule="FoodPin" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="390" height="445"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -235,21 +235,35 @@
                                                 <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30"/>
                                             </buttonConfiguration>
                                         </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EhA-sl-KEG" userLabel="dim view">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="445"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.19854615066225165" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="EhA-sl-KEG" firstAttribute="top" secondItem="HSS-jp-OgW" secondAttribute="top" id="3YI-Ct-xZ8"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Lln-o0-4w4" secondAttribute="trailing" constant="10" id="4To-7h-Q6T"/>
                                         <constraint firstAttribute="bottom" secondItem="vg4-3y-onD" secondAttribute="bottom" constant="20" id="4sL-Rb-ZuY"/>
                                         <constraint firstItem="gh6-NM-UQp" firstAttribute="top" secondItem="HSS-jp-OgW" secondAttribute="top" id="6pP-5A-WWa"/>
                                         <constraint firstItem="vg4-3y-onD" firstAttribute="leading" secondItem="HSS-jp-OgW" secondAttribute="leading" constant="20" id="BEU-Eg-3pR"/>
+                                        <constraint firstAttribute="bottom" secondItem="EhA-sl-KEG" secondAttribute="bottom" id="DCX-2p-nbL"/>
                                         <constraint firstAttribute="bottom" secondItem="vg4-3y-onD" secondAttribute="bottom" constant="20" id="GIX-rY-n5g"/>
                                         <constraint firstAttribute="trailing" secondItem="vg4-3y-onD" secondAttribute="trailing" constant="20" id="Jpd-Dt-wSx"/>
                                         <constraint firstAttribute="bottom" secondItem="gh6-NM-UQp" secondAttribute="bottom" id="KEq-eJ-JfN"/>
+                                        <constraint firstItem="EhA-sl-KEG" firstAttribute="leading" secondItem="HSS-jp-OgW" secondAttribute="leading" id="SyD-Eh-8Sg"/>
                                         <constraint firstItem="Lln-o0-4w4" firstAttribute="top" secondItem="HSS-jp-OgW" secondAttribute="topMargin" constant="10" id="UkC-Q1-DJF"/>
+                                        <constraint firstAttribute="trailing" secondItem="EhA-sl-KEG" secondAttribute="trailing" id="VX5-kH-JJN"/>
                                         <constraint firstItem="gh6-NM-UQp" firstAttribute="leading" secondItem="HSS-jp-OgW" secondAttribute="leading" id="Vb8-yk-qVt"/>
                                         <constraint firstAttribute="trailing" secondItem="gh6-NM-UQp" secondAttribute="trailing" id="epQ-S3-D82"/>
                                         <constraint firstItem="vg4-3y-onD" firstAttribute="leading" secondItem="HSS-jp-OgW" secondAttribute="leading" constant="20" id="tNg-BJ-4hs"/>
                                         <constraint firstAttribute="trailing" secondItem="vg4-3y-onD" secondAttribute="trailing" constant="150" id="w1B-yU-VWl"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="headerImageView" destination="gh6-NM-UQp" id="21e-wp-P1q"/>
+                                        <outlet property="heartButton" destination="Lln-o0-4w4" id="4DG-Du-p5U"/>
+                                        <outlet property="nameLabel" destination="sQ6-CV-wth" id="X00-Ut-23A"/>
+                                        <outlet property="typeLabel" destination="yck-Sg-nlr" id="HuA-XL-ANk"/>
+                                    </connections>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="TtI-Qr-z66">
@@ -281,6 +295,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fK4-i3-3MD"/>
+                    <connections>
+                        <outlet property="headerView" destination="HSS-jp-OgW" id="LLs-gK-YQn"/>
+                        <outlet property="tableView" destination="kat-vs-MDe" id="Mkr-d8-jL8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AG0-qV-bgJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

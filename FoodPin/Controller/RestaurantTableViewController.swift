@@ -182,9 +182,9 @@ class RestaurantTableViewController: UITableViewController {
         return swipeConfiguration
     }
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard let restaurant = dataSource.itemIdentifier(for: indexPath) else {
-            return UISwipeActionsConfiguration()
-        }
+//        guard let restaurant = dataSource.itemIdentifier(for: indexPath) else {
+//            return UISwipeActionsConfiguration()
+//        }
         
         let addToFavoritesAction = UIContextualAction(style: .normal, title: nil) { action, view, handler in
             
@@ -198,7 +198,7 @@ class RestaurantTableViewController: UITableViewController {
         }
         
         addToFavoritesAction.backgroundColor = UIColor.systemYellow
-        addToFavoritesAction.image = self.restaurants[indexPath.row].isFavorite ? UIImage(systemName: "heart.slash.fill") : UIImage(systemName: "heartd.fill")
+        addToFavoritesAction.image = self.restaurants[indexPath.row].isFavorite ? UIImage(systemName: "heart.slash.fill") : UIImage(systemName: "heart.fill")
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [addToFavoritesAction])
         return swipeConfiguration
     }
