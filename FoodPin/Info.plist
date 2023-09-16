@@ -58,6 +58,10 @@
 	</array>
 	<key>UIStatusBarStyle</key>
 	<string></string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>You need to grant the app access to your photo library so you can pick your favorite restaurant photo.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>You need to grant the app access to your camera in order to take photos.</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -37,6 +37,9 @@ class RestaurantTableViewController: UITableViewController {
     
     lazy var dataSource = configureDataSource()
     
+    @IBAction func unwindToHome(segue: UIStoryboardSegue) {
+        dismiss(animated: true,completion: nil)
+    }
     
     // MARK: - View controller life cycle
     
