@@ -50,7 +50,7 @@ class ReviewViewController: UIViewController {
     }
     
     func imageBluring() {
-        backgroundImageView.image = UIImage(named: restaurant.image)
+        backgroundImageView.image = UIImage(data: restaurant.image)
         // Applying the blur effect
         let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
