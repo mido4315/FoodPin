@@ -406,8 +406,23 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="emptyRestaurantView" destination="VFT-qK-rsw" id="4mY-Sy-hkg"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NXi-f6-o3K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="LMd-zo-idl">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="emptydata" translatesAutoresizingMaskIntoConstraints="NO" id="VFT-qK-rsw">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="LYK-p0-3Kk"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="813.84615384615381" y="88.862559241706151"/>
         </scene>
@@ -474,17 +489,6 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lln-o0-4w4">
-                                            <rect key="frame" x="301.33333333333331" y="18" width="70.666666666666686" height="45"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="45" id="0QT-TI-yyQ"/>
-                                            </constraints>
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system">
-                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30"/>
-                                            </buttonConfiguration>
-                                        </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EhA-sl-KEG" userLabel="dim view">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="445"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.19854615066225165" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -492,7 +496,6 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="EhA-sl-KEG" firstAttribute="top" secondItem="HSS-jp-OgW" secondAttribute="top" id="3YI-Ct-xZ8"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Lln-o0-4w4" secondAttribute="trailing" constant="10" id="4To-7h-Q6T"/>
                                         <constraint firstAttribute="bottom" secondItem="vg4-3y-onD" secondAttribute="bottom" constant="20" id="4sL-Rb-ZuY"/>
                                         <constraint firstItem="gh6-NM-UQp" firstAttribute="top" secondItem="HSS-jp-OgW" secondAttribute="top" id="6pP-5A-WWa"/>
                                         <constraint firstItem="vg4-3y-onD" firstAttribute="leading" secondItem="HSS-jp-OgW" secondAttribute="leading" constant="20" id="BEU-Eg-3pR"/>
@@ -501,18 +504,15 @@
                                         <constraint firstAttribute="trailing" secondItem="vg4-3y-onD" secondAttribute="trailing" constant="20" id="Jpd-Dt-wSx"/>
                                         <constraint firstAttribute="bottom" secondItem="gh6-NM-UQp" secondAttribute="bottom" id="KEq-eJ-JfN"/>
                                         <constraint firstItem="EhA-sl-KEG" firstAttribute="leading" secondItem="HSS-jp-OgW" secondAttribute="leading" id="SyD-Eh-8Sg"/>
-                                        <constraint firstItem="Lln-o0-4w4" firstAttribute="top" secondItem="HSS-jp-OgW" secondAttribute="topMargin" constant="10" id="UkC-Q1-DJF"/>
                                         <constraint firstAttribute="trailing" secondItem="EhA-sl-KEG" secondAttribute="trailing" id="VX5-kH-JJN"/>
                                         <constraint firstItem="gh6-NM-UQp" firstAttribute="leading" secondItem="HSS-jp-OgW" secondAttribute="leading" id="Vb8-yk-qVt"/>
                                         <constraint firstAttribute="trailing" secondItem="qHc-Yc-let" secondAttribute="trailing" constant="20" id="dkI-hT-ZxK"/>
                                         <constraint firstAttribute="trailing" secondItem="gh6-NM-UQp" secondAttribute="trailing" id="epQ-S3-D82"/>
-                                        <constraint firstItem="Lln-o0-4w4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HSS-jp-OgW" secondAttribute="leading" constant="20" symbolic="YES" id="fYu-fB-gP3"/>
                                         <constraint firstItem="vg4-3y-onD" firstAttribute="bottom" secondItem="qHc-Yc-let" secondAttribute="bottom" id="kKp-Vu-RfS"/>
                                         <constraint firstItem="vg4-3y-onD" firstAttribute="leading" secondItem="HSS-jp-OgW" secondAttribute="leading" constant="20" id="tNg-BJ-4hs"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="headerImageView" destination="gh6-NM-UQp" id="21e-wp-P1q"/>
-                                        <outlet property="heartButton" destination="Lln-o0-4w4" id="4DG-Du-p5U"/>
                                         <outlet property="nameLabel" destination="sQ6-CV-wth" id="X00-Ut-23A"/>
                                         <outlet property="ratingImageView" destination="qHc-Yc-let" id="UOG-Ei-ZXI"/>
                                         <outlet property="typeLabel" destination="yck-Sg-nlr" id="HuA-XL-ANk"/>
@@ -845,8 +845,8 @@
     <resources>
         <image name="angry" width="78" height="103"/>
         <image name="cool" width="78" height="83"/>
+        <image name="emptydata" width="1440" height="1024"/>
         <image name="happy" width="78" height="86"/>
-        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="love" width="78" height="82"/>
         <image name="newphoto" width="1840" height="1380"/>

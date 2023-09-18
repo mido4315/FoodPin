@@ -6,17 +6,24 @@
 //
 
 import UIKit
+import CoreData
 
 class RestaurantTableViewController: UITableViewController {
 
     var restaurants:[Restaurant] = []
+    
+    var fetchResultController: NSFetchedResultsController<Restaurant>!
+    
+
+
+    
     
     lazy var dataSource = configureDataSource()
     
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
         dismiss(animated: true,completion: nil)
     }
-    
+    @IBOutlet var emptyRestaurantView: UIView!
     // MARK: - View controller life cycle
     
     override func viewDidLoad() {
@@ -46,14 +53,20 @@ class RestaurantTableViewController: UITableViewController {
         tableView.dataSource = dataSource
         tableView.separatorStyle = .none
         
-        // Create a snapshot and populate the data
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Restaurant>()
-        snapshot.appendSections([.all])
-        snapshot.appendItems(restaurants, toSection: .all)
-        
-        dataSource.apply(snapshot, animatingDifferences: false)
+//        // Create a snapshot and populate the data
+//        var snapshot = NSDiffableDataSourceSnapshot<Section, Restaurant>()
+//        snapshot.appendSections([.all])
+//        snapshot.appendItems(restaurants, toSection: .all)
+//
+//        dataSource.apply(snapshot, animatingDifferences: false)
         
         tableView.cellLayoutMarginsFollowReadableWidth = true
+        
+        // Prepare the empty view
+        tableView.backgroundView = emptyRestaurantView
+        tableView.backgroundView?.isHidden = restaurants.count == 0 ? false : true
+        
+        fetchRestaurantData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -143,9 +156,15 @@ class RestaurantTableViewController: UITableViewController {
             return UISwipeActionsConfiguration()
         }
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (contextualAction, sourceView, completionHandler) in
-            var snapshot = self.dataSource.snapshot()
-            snapshot.deleteItems([restaurant])
-            self.dataSource.apply(snapshot, animatingDifferences: true)
+            
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                let context = appDelegate.persistentContainer.viewContext
+                // Delete the item
+                context.delete(restaurant)
+                appDelegate.saveContext()
+                // Update the view
+                self.updateSnapshot(animatingChange: true)
+            }
             // Call completion handler to dismiss the action button
             completionHandler(true)
         }
@@ -209,6 +228,60 @@ class RestaurantTableViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! RestaurantDetailViewController
                 destinationController.restaurant = restaurants[indexPath.row]
+            }
+        }
+    }
+    
+}
+
+
+extension RestaurantTableViewController: NSFetchedResultsControllerDelegate{
+    
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        updateSnapshot()
+    }
+    
+    func updateSnapshot(animatingChange: Bool = false) {
+        if let fetchedObjects = fetchResultController.fetchedObjects {
+            restaurants = fetchedObjects
+        }
+
+        // Create a snapshot and populate the data
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Restaurant>()
+        snapshot.appendSections([.all])
+        snapshot.appendItems(restaurants, toSection: .all)
+
+        dataSource.apply(snapshot, animatingDifferences: animatingChange)
+
+        tableView.backgroundView?.isHidden = restaurants.isEmpty ? false : true
+    }
+
+    func fetchRestaurantData() {
+        
+        // Fetch data from the data store
+        let fetchRequest: NSFetchRequest<Restaurant> = Restaurant.fetchRequest()
+        
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            let context = appDelegate.persistentContainer.viewContext
+            
+            fetchResultController = NSFetchedResultsController(
+                fetchRequest: fetchRequest,
+                managedObjectContext: context,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+            )
+            
+            fetchResultController.delegate = self
+            
+            do {
+                try fetchResultController.performFetch()
+                updateSnapshot()
+            } catch {
+                print(error)
             }
         }
     }
